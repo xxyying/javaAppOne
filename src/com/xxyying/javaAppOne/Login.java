@@ -34,7 +34,6 @@ public class Login extends JFrame {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		
@@ -87,7 +86,10 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// System.out.println("hello");
-				login();
+				String name = txtName.getText();
+				String address = txtAddress.getText();
+				int port = Integer.parseInt(txtPort.getText());
+				login(name, address, port);
 			}
 			
 		});
@@ -98,8 +100,9 @@ public class Login extends JFrame {
 	/**
 	 * Login function here
 	 */
-	private void login() {
-		
+	private void login(String name, String address, int port) {
+		dispose();
+		new Client(name, address, port);
 	}
 	
 	
