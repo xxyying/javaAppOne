@@ -26,18 +26,19 @@ import java.net.UnknownHostException;
 public class Client extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
 
 	private String name, address;
 	private int port;
-	private JTextField txtMessage;
-	private JTextArea history;
-	private DefaultCaret caret;
-	
 	private DatagramSocket socket;
 	private InetAddress ip;
-	
 	private Thread send;
+	
+	private DefaultCaret caret;
+	private JPanel contentPane;
+	private JTextField txtMessage;
+	private JTextArea history;
+	
+
 	
 	
 	public Client(String name, String address, int port) {
@@ -56,11 +57,13 @@ public class Client extends JFrame {
 		
 		createWindow();
 		console("Attempting a connection to " + address + ": " + port + ", user: " + name);
+		String connection = name + " connected from " + address + ": " + port; 
+		send(connection.getBytes());
 	}
 	
 	private boolean openConnection(String address, int port) {
 		try {
-			socket = new DatagramSocket(port);
+			socket = new DatagramSocket();
 			ip = InetAddress.getByName(address);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -173,6 +176,7 @@ public class Client extends JFrame {
 		if (message.equals("")) return;
 		message = name + ": " + message;
 		console(message);
+		send(message.getBytes());
 		history.setCaretPosition(history.getDocument().getLength());
 		txtMessage.setText("");
 	}
