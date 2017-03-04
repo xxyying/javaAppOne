@@ -102,13 +102,10 @@ public class Login extends JFrame {
 	 */
 	private void login(String name, String address, int port) {
 		dispose();
-		new Client(name, address, port);
+		new ClientWindow(name, address, port);
 	}
 	
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
