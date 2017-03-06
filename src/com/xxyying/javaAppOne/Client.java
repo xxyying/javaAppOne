@@ -32,6 +32,8 @@ public class Client {
 	private DatagramSocket socket;
 	private InetAddress ip;
 	private Thread send;
+	
+	private int ID = -1;
 
 	
 	public Client(String name, String address, int port) {
@@ -68,7 +70,7 @@ public class Client {
 		return true;
 	}
 	
-	private String receive() {
+	public String receive() {
 		byte[] data = new byte[1024];
 		DatagramPacket packet = new DatagramPacket(data, data.length);
 		
@@ -79,6 +81,7 @@ public class Client {
 		}
 		
 		String message = new String(packet.getData());
+
 		return message;
 	}
 	
@@ -96,7 +99,15 @@ public class Client {
 		send.start();
 		
 	}
+
+
+	public void setID(int ID) {
+		this.ID = ID;
+	}
 	
+	public int getID() {
+		return ID;
+	}
 	
 	
 	
